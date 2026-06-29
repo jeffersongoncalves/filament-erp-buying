@@ -1,6 +1,5 @@
 <?php
 
-use Filament\Actions\Testing\TestAction;
 use JeffersonGoncalves\Erp\Buying\Models\PurchaseOrder;
 use JeffersonGoncalves\Erp\Buying\Models\SupplierQuotation;
 use JeffersonGoncalves\Erp\Core\Models\Company;
@@ -47,7 +46,7 @@ it('creates a purchase order from a submitted supplier quotation through the UI'
     $quotation->submit();
 
     Livewire::test(ListSupplierQuotations::class)
-        ->callAction(TestAction::make('createPurchaseOrder')->table($quotation));
+        ->callTableAction('createPurchaseOrder', $quotation);
 
     $order = PurchaseOrder::query()->first();
 
