@@ -2,8 +2,10 @@
 
 namespace JeffersonGoncalves\FilamentErp\Buying\Resources\PurchaseOrders;
 
-use Filament\Forms\Form;
+use BackedEnum;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use JeffersonGoncalves\Erp\Buying\Support\ModelResolver;
 use JeffersonGoncalves\FilamentErp\Buying\FilamentErpBuyingPlugin;
@@ -16,7 +18,7 @@ use JeffersonGoncalves\FilamentErp\Buying\Resources\PurchaseOrders\Tables\Purcha
 
 class PurchaseOrderResource extends Resource
 {
-    protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingCart;
 
     protected static ?int $navigationSort = 5;
 
@@ -36,9 +38,9 @@ class PurchaseOrderResource extends Resource
         }
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return PurchaseOrderForm::configure($form);
+        return PurchaseOrderForm::configure($schema);
     }
 
     public static function table(Table $table): Table

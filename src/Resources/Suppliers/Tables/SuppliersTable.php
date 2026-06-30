@@ -2,7 +2,7 @@
 
 namespace JeffersonGoncalves\FilamentErp\Buying\Resources\Suppliers\Tables;
 
-use Filament\Tables\Actions;
+use Filament\Actions;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -55,11 +55,11 @@ class SuppliersTable
                 TernaryFilter::make('disabled')
                     ->label('Disabled'),
             ])
-            ->actions([
+            ->recordActions([
                 Actions\EditAction::make(),
                 Actions\DeleteAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 Actions\BulkActionGroup::make([
                     Actions\DeleteBulkAction::make(),
                 ]),
