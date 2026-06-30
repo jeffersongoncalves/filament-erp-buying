@@ -2,8 +2,10 @@
 
 namespace JeffersonGoncalves\FilamentErp\Buying\Resources\Suppliers;
 
-use Filament\Forms\Form;
+use BackedEnum;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use JeffersonGoncalves\Erp\Buying\Support\ModelResolver;
 use JeffersonGoncalves\FilamentErp\Buying\FilamentErpBuyingPlugin;
@@ -17,7 +19,7 @@ use JeffersonGoncalves\FilamentErp\Buying\Resources\Suppliers\Tables\SuppliersTa
 
 class SupplierResource extends Resource
 {
-    protected static ?string $navigationIcon = 'heroicon-o-truck';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTruck;
 
     protected static ?int $navigationSort = 2;
 
@@ -37,9 +39,9 @@ class SupplierResource extends Resource
         }
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return SupplierForm::configure($form);
+        return SupplierForm::configure($schema);
     }
 
     public static function table(Table $table): Table
