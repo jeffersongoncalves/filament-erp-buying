@@ -1,15 +1,16 @@
 <?php
 
-namespace JeffersonGoncalves\FilamentErp\Buying\Resources\RequestForQuotations\Tables;
+namespace JeffersonGoncalves\FilamentErp\Buying\Resources\BlanketOrders\Tables;
 
 use Filament\Tables\Actions;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use JeffersonGoncalves\Erp\Buying\Enums\BlanketOrderType;
 use JeffersonGoncalves\Erp\Core\Enums\DocStatus;
 use JeffersonGoncalves\FilamentErp\Core\Concerns\SubmittableRecordActions;
 
-class RequestForQuotationsTable
+class BlanketOrdersTable
 {
     use SubmittableRecordActions;
 
@@ -17,12 +18,25 @@ class RequestForQuotationsTable
     {
         return $table
             ->columns([
-                TextColumn::make('naming_series')
-                    ->label('Series')
+                TextColumn::make('order_type')
+                    ->label('Order Type')
+                    ->badge()
+                    ->formatStateUsing(fn ($state) => $state instanceof BlanketOrderType ? $state->value : $state)
+                    ->color(fn ($state) => match ($state) {
+                        BlanketOrderType::Purchasing => 'info',
+                        BlanketOrderType::Selling => 'warning',
+                        default => 'gray',
+                    }),
+                TextColumn::make('party_type')
+                    ->label('Party Type')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('transaction_date')
-                    ->label('Date')
+                TextColumn::make('from_date')
+                    ->label('From Date')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('to_date')
+                    ->label('To Date')
                     ->date()
                     ->sortable(),
                 TextColumn::make('company.name')
@@ -40,8 +54,14 @@ class RequestForQuotationsTable
                         default => 'gray',
                     }),
             ])
-            ->defaultSort('transaction_date', 'desc')
+            ->defaultSort('from_date', 'desc')
             ->filters([
+                SelectFilter::make('order_type')
+                    ->label('Order Type')
+                    ->options([
+                        BlanketOrderType::Purchasing->value => 'Purchasing',
+                        BlanketOrderType::Selling->value => 'Selling',
+                    ]),
                 SelectFilter::make('docstatus')
                     ->label('Status')
                     ->options([

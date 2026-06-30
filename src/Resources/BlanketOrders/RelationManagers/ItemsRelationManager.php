@@ -1,8 +1,7 @@
 <?php
 
-namespace JeffersonGoncalves\FilamentErp\Buying\Resources\PurchaseOrders\RelationManagers;
+namespace JeffersonGoncalves\FilamentErp\Buying\Resources\BlanketOrders\RelationManagers;
 
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -25,28 +24,18 @@ class ItemsRelationManager extends RelationManager
                     ->label('Item Code')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('item_name')
-                    ->label('Item Name')
-                    ->maxLength(255),
-                Select::make('warehouse_id')
-                    ->label('Warehouse')
-                    ->relationship('warehouse', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->nullable(),
                 TextInput::make('qty')
                     ->label('Qty')
                     ->numeric()
-                    ->default(1),
+                    ->default(0),
                 TextInput::make('rate')
                     ->label('Rate')
                     ->numeric()
                     ->default(0),
-                TextInput::make('amount')
-                    ->label('Amount')
+                TextInput::make('ordered_qty')
+                    ->label('Ordered Qty')
                     ->numeric()
-                    ->disabled()
-                    ->dehydrated(false),
+                    ->default(0),
             ]);
     }
 
@@ -58,26 +47,13 @@ class ItemsRelationManager extends RelationManager
                 TextColumn::make('item_code')
                     ->label('Item Code')
                     ->searchable(),
-                TextColumn::make('item_name')
-                    ->label('Item Name')
-                    ->toggleable(),
                 TextColumn::make('qty')
                     ->numeric(),
                 TextColumn::make('rate')
                     ->numeric(),
-                TextColumn::make('amount')
+                TextColumn::make('ordered_qty')
+                    ->label('Ordered Qty')
                     ->numeric(),
-                TextColumn::make('warehouse.name')
-                    ->label('Warehouse')
-                    ->toggleable(),
-                TextColumn::make('received_qty')
-                    ->label('Received')
-                    ->numeric()
-                    ->toggleable(),
-                TextColumn::make('billed_qty')
-                    ->label('Billed')
-                    ->numeric()
-                    ->toggleable(),
             ])
             ->headerActions([
                 Actions\CreateAction::make(),
