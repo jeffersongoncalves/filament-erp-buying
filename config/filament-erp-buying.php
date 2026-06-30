@@ -1,10 +1,12 @@
 <?php
 
+use JeffersonGoncalves\FilamentErp\Buying\Resources\BlanketOrders\BlanketOrderResource;
 use JeffersonGoncalves\FilamentErp\Buying\Resources\PurchaseOrders\PurchaseOrderResource;
 use JeffersonGoncalves\FilamentErp\Buying\Resources\RequestForQuotations\RequestForQuotationResource;
 use JeffersonGoncalves\FilamentErp\Buying\Resources\SupplierGroups\SupplierGroupResource;
 use JeffersonGoncalves\FilamentErp\Buying\Resources\SupplierQuotations\SupplierQuotationResource;
 use JeffersonGoncalves\FilamentErp\Buying\Resources\Suppliers\SupplierResource;
+use JeffersonGoncalves\FilamentErp\Buying\Resources\SupplierScorecards\SupplierScorecardResource;
 use JeffersonGoncalves\FilamentErp\Buying\Widgets\PurchaseOrderStatsWidget;
 
 return [
@@ -37,6 +39,8 @@ return [
         'request_for_quotation' => RequestForQuotationResource::class,
         'supplier_quotation' => SupplierQuotationResource::class,
         'purchase_order' => PurchaseOrderResource::class,
+        'blanket_order' => BlanketOrderResource::class,
+        'supplier_scorecard' => SupplierScorecardResource::class,
     ],
 
     /*
