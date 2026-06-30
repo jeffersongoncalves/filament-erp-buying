@@ -1,6 +1,5 @@
 <?php
 
-use Filament\Actions\Testing\TestAction;
 use JeffersonGoncalves\Erp\Accounting\Enums\AccountType;
 use JeffersonGoncalves\Erp\Accounting\Models\Account;
 use JeffersonGoncalves\Erp\Accounting\Models\PurchaseInvoice;
@@ -60,7 +59,7 @@ it('submits a purchase order through the UI', function () {
     $order = makePurchaseOrder();
 
     Livewire::test(ListPurchaseOrders::class)
-        ->callAction(TestAction::make('submit')->table($order));
+        ->callTableAction('submit', $order);
 
     expect($order->refresh()->docstatus)->toBe(DocStatus::Submitted);
 });
@@ -70,7 +69,7 @@ it('creates a stock purchase receipt from a submitted purchase order through the
     $order->submit();
 
     Livewire::test(ListPurchaseOrders::class)
-        ->callAction(TestAction::make('createPurchaseReceipt')->table($order));
+        ->callTableAction('createPurchaseReceipt', $order);
 
     $receipt = PurchaseReceipt::query()->first();
 
@@ -92,7 +91,7 @@ it('creates an accounting purchase invoice from a submitted purchase order throu
     $order->submit();
 
     Livewire::test(ListPurchaseOrders::class)
-        ->callAction(TestAction::make('createPurchaseInvoice')->table($order));
+        ->callTableAction('createPurchaseInvoice', $order);
 
     $invoice = PurchaseInvoice::query()->first();
 
