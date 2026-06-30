@@ -1,5 +1,6 @@
 <?php
 
+use Filament\Actions\Testing\TestAction;
 use JeffersonGoncalves\Erp\Buying\Models\Supplier;
 use JeffersonGoncalves\Erp\Buying\Models\SupplierScorecard;
 use JeffersonGoncalves\FilamentErp\Buying\Resources\SupplierScorecards\Pages\CreateSupplierScorecard;
@@ -59,7 +60,7 @@ it('refreshes the score and standing through the UI', function () {
     ]);
 
     Livewire::test(ListSupplierScorecards::class)
-        ->callTableAction('refreshScore', $scorecard);
+        ->callAction(TestAction::make('refreshScore')->table($scorecard));
 
     $scorecard->refresh();
 
