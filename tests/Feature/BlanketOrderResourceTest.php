@@ -1,6 +1,5 @@
 <?php
 
-use Filament\Actions\Testing\TestAction;
 use JeffersonGoncalves\Erp\Buying\Models\BlanketOrder;
 use JeffersonGoncalves\Erp\Core\Enums\DocStatus;
 use JeffersonGoncalves\Erp\Core\Models\Company;
@@ -65,7 +64,7 @@ it('submits a blanket order through the UI', function () {
     $order = makeBlanketOrder();
 
     Livewire::test(ListBlanketOrders::class)
-        ->callAction(TestAction::make('submit')->table($order));
+        ->callTableAction('submit', $order);
 
     expect($order->refresh()->docstatus)->toBe(DocStatus::Submitted);
 });

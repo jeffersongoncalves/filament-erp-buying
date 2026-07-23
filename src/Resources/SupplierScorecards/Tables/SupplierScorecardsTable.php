@@ -2,10 +2,9 @@
 
 namespace JeffersonGoncalves\FilamentErp\Buying\Resources\SupplierScorecards\Tables;
 
-use Filament\Actions;
-use Filament\Actions\Action;
 use Filament\Notifications\Notification;
-use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Actions;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TernaryFilter;
@@ -53,12 +52,12 @@ class SupplierScorecardsTable
                 TernaryFilter::make('disabled')
                     ->label('Disabled'),
             ])
-            ->recordActions([
+            ->actions([
                 Actions\EditAction::make(),
                 self::refreshScoreAction(),
                 Actions\DeleteAction::make(),
             ])
-            ->toolbarActions([
+            ->bulkActions([
                 Actions\BulkActionGroup::make([
                     Actions\DeleteBulkAction::make(),
                 ]),
@@ -69,7 +68,7 @@ class SupplierScorecardsTable
     {
         return Action::make('refreshScore')
             ->label('Refresh score')
-            ->icon(Heroicon::OutlinedArrowPath)
+            ->icon('heroicon-o-arrow-path')
             ->color('info')
             ->requiresConfirmation()
             ->action(function (Model $record): void {

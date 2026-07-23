@@ -2,10 +2,8 @@
 
 namespace JeffersonGoncalves\FilamentErp\Buying\Resources\SupplierScorecards;
 
-use BackedEnum;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use JeffersonGoncalves\Erp\Buying\Models\SupplierScorecard;
 use JeffersonGoncalves\FilamentErp\Buying\FilamentErpBuyingPlugin;
@@ -18,7 +16,7 @@ use JeffersonGoncalves\FilamentErp\Buying\Resources\SupplierScorecards\Tables\Su
 
 class SupplierScorecardResource extends Resource
 {
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartBar;
+    protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
 
     protected static ?int $navigationSort = 7;
 
@@ -38,9 +36,9 @@ class SupplierScorecardResource extends Resource
         }
     }
 
-    public static function form(Schema $schema): Schema
+    public static function form(Form $form): Form
     {
-        return SupplierScorecardForm::configure($schema);
+        return SupplierScorecardForm::configure($form);
     }
 
     public static function table(Table $table): Table

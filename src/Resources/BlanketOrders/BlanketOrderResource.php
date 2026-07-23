@@ -2,10 +2,8 @@
 
 namespace JeffersonGoncalves\FilamentErp\Buying\Resources\BlanketOrders;
 
-use BackedEnum;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use JeffersonGoncalves\Erp\Buying\Models\BlanketOrder;
 use JeffersonGoncalves\FilamentErp\Buying\FilamentErpBuyingPlugin;
@@ -18,7 +16,7 @@ use JeffersonGoncalves\FilamentErp\Buying\Resources\BlanketOrders\Tables\Blanket
 
 class BlanketOrderResource extends Resource
 {
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
     protected static ?int $navigationSort = 6;
 
@@ -38,9 +36,9 @@ class BlanketOrderResource extends Resource
         }
     }
 
-    public static function form(Schema $schema): Schema
+    public static function form(Form $form): Form
     {
-        return BlanketOrderForm::configure($schema);
+        return BlanketOrderForm::configure($form);
     }
 
     public static function table(Table $table): Table
