@@ -2,9 +2,10 @@
 
 namespace JeffersonGoncalves\FilamentErp\Buying\Resources\PurchaseOrders\Tables;
 
+use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Notifications\Notification;
-use Filament\Tables\Actions;
-use Filament\Tables\Actions\Action;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -86,7 +87,7 @@ class PurchaseOrdersTable
                         2 => 'Cancelled',
                     ]),
             ])
-            ->actions([
+            ->recordActions([
                 Actions\EditAction::make()
                     ->visible(fn ($record): bool => $record->docstatus === DocStatus::Draft),
                 ...self::submittableRecordActions(),
@@ -101,7 +102,7 @@ class PurchaseOrdersTable
     {
         return Action::make('createPurchaseReceipt')
             ->label('Create Purchase Receipt')
-            ->icon('heroicon-o-inbox-arrow-down')
+            ->icon(Heroicon::OutlinedInboxArrowDown)
             ->color('info')
             ->requiresConfirmation()
             ->visible(fn (Model $record): bool => $record->getAttribute('docstatus') === DocStatus::Submitted)
@@ -132,7 +133,7 @@ class PurchaseOrdersTable
     {
         return Action::make('createPurchaseInvoice')
             ->label('Create Purchase Invoice')
-            ->icon('heroicon-o-document-text')
+            ->icon(Heroicon::OutlinedDocumentText)
             ->color('info')
             ->requiresConfirmation()
             ->visible(fn (Model $record): bool => $record->getAttribute('docstatus') === DocStatus::Submitted)

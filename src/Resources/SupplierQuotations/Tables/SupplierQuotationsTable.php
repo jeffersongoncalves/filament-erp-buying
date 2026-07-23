@@ -2,9 +2,10 @@
 
 namespace JeffersonGoncalves\FilamentErp\Buying\Resources\SupplierQuotations\Tables;
 
+use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Notifications\Notification;
-use Filament\Tables\Actions;
-use Filament\Tables\Actions\Action;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -67,7 +68,7 @@ class SupplierQuotationsTable
                         2 => 'Cancelled',
                     ]),
             ])
-            ->actions([
+            ->recordActions([
                 Actions\EditAction::make()
                     ->visible(fn ($record): bool => $record->docstatus === DocStatus::Draft),
                 ...self::submittableRecordActions(),
@@ -81,7 +82,7 @@ class SupplierQuotationsTable
     {
         return Action::make('createPurchaseOrder')
             ->label('Create Purchase Order')
-            ->icon('heroicon-o-shopping-cart')
+            ->icon(Heroicon::OutlinedShoppingCart)
             ->color('info')
             ->requiresConfirmation()
             ->visible(fn (Model $record): bool => $record->getAttribute('docstatus') === DocStatus::Submitted)

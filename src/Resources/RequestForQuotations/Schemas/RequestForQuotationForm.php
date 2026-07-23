@@ -3,17 +3,17 @@
 namespace JeffersonGoncalves\FilamentErp\Buying\Resources\RequestForQuotations\Schemas;
 
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Form;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 
 class RequestForQuotationForm
 {
-    public static function configure(Form $form): Form
+    public static function configure(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->columns(null)
-            ->schema([
+            ->components([
                 Section::make('Details')
                     ->schema([
                         DatePicker::make('transaction_date')

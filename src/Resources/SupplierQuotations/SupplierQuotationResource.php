@@ -2,8 +2,10 @@
 
 namespace JeffersonGoncalves\FilamentErp\Buying\Resources\SupplierQuotations;
 
-use Filament\Forms\Form;
+use BackedEnum;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use JeffersonGoncalves\Erp\Buying\Support\ModelResolver;
 use JeffersonGoncalves\FilamentErp\Buying\FilamentErpBuyingPlugin;
@@ -16,7 +18,7 @@ use JeffersonGoncalves\FilamentErp\Buying\Resources\SupplierQuotations\Tables\Su
 
 class SupplierQuotationResource extends Resource
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-currency-dollar';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentCurrencyDollar;
 
     protected static ?int $navigationSort = 4;
 
@@ -36,9 +38,9 @@ class SupplierQuotationResource extends Resource
         }
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return SupplierQuotationForm::configure($form);
+        return SupplierQuotationForm::configure($schema);
     }
 
     public static function table(Table $table): Table
